@@ -27,5 +27,5 @@ app.use(express.urlencoded({ extended: false}));
 app.use('/openai', require('./routes/openaiRoutes'));
 
 
-// Listen for server and callback when up
+// Listen for server and callback when up and print to console
 app.listen(port, ()=> console.log(`Server started on port ${port}`));
