@@ -6,9 +6,10 @@ const configuration = new Configuration({
 });
 const openai = new OpenAIApi(configuration);
 
-const generateImage = async (req, res) => {
 
+const generateImage = async (req, res) => {
   // destructure req body for passage data through webform
+
   const { prompt, size } = req.body;
 
   const imageSize =
@@ -16,7 +17,6 @@ const generateImage = async (req, res) => {
   // place a response inside a variable
   try {
     const response = await openai.createImage({
-      //response contents
       prompt,
       n: 1,
     });
@@ -25,7 +25,7 @@ const generateImage = async (req, res) => {
     const imageUrl = response.data.data[0].url;
 
     // produce a verification response
-    return res.status(200).json({
+     return res.status(200).json({
       success: true,
       data: imageUrl,
     });
@@ -35,9 +35,7 @@ const generateImage = async (req, res) => {
     if (error.response) {
       console.log(error.response.status);
       console.log(error.response.data);
-
     } else {
-      
       console.log(error.message);
     }
   }
@@ -45,9 +43,6 @@ const generateImage = async (req, res) => {
     success: false,
     error: "Image was not obtained",
   });
-
-  // return;
-
 };
 
 module.exports = { generateImage };
